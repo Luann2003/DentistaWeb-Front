@@ -1,0 +1,25 @@
+
+<div class="container">
+    <div class="container-info">
+        <h1>Escolha sua área de interesse</h1>
+        <h4>Ortodontia, implantes, emergências</h4>
+        <mat-form-field appearance="outline"> 
+            <input [placeholder]="placeholder" #inputField matInput />
+        </mat-form-field>
+
+        <div>
+            <mat-card *ngIf="data?.address"> 
+                <img class="place-image" [src]="data.imageUrl" mat-card-image />
+                <mat-card-header> 
+                  <img mat-card-avatar [src]="data.iconUrl"/>
+                  <mat-card-title> {{ data.name }} </mat-card-title>
+                </mat-card-header>
+            </mat-card>
+        </div>
+
+        <div class="container-map">
+            <app-map-display [from]="fromValue" [to]="toValue"> </app-map-display>
+        </div>
+    </div>
+
+</div>
