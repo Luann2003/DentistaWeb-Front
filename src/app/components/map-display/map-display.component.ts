@@ -3,6 +3,9 @@ import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { GoogleMap, GoogleMapsModule, MapDirectionsService } from '@angular/google-maps';
 import { map } from 'rxjs';
 import { PlaceSearchResult } from '../home-page/home-page.component';
+import { HomeService } from '../../services/home.service';
+import { GeocodeService } from '../../services/geocode-service.service';
+import { IlocalizacaoDTO } from '../../interfaces/IlocalizacaoDTO';
 
 @Component({
   selector: 'app-map-display',
@@ -12,10 +15,12 @@ import { PlaceSearchResult } from '../home-page/home-page.component';
   styleUrl: './map-display.component.scss'
 })
 export class MapDisplayComponent implements AfterViewInit {
+  @Input() localizacao?: IlocalizacaoDTO;
+
 
   @ViewChild('map', { static: true })
   map!: GoogleMap;
-  zoom = 12;
+  zoom = 14;
 
   center: google.maps.LatLng | undefined;
   directionsResult: google.maps.DirectionsResult | undefined;
@@ -24,11 +29,45 @@ export class MapDisplayComponent implements AfterViewInit {
   @Input() from: PlaceSearchResult | undefined
   @Input() to: PlaceSearchResult | undefined
 
-  constructor(private directionsService: MapDirectionsService) {
+  address!: string;
+  coordinates?: google.maps.LatLng | undefined;
+
+
+  constructor(private directionsService: MapDirectionsService,
+    private homeService: HomeService,
+    private geocodeService: GeocodeService
+  ) {
   }
 
+  getCoordinates() {
+    this.address = `${this.localizacao?.rua}, ${this.localizacao?.number}, ${this.localizacao?.cidade}, ${this.localizacao?.estado}`;
+    
+    this.geocodeService.getCoordinates(this.address).subscribe((response) => {
+      console.log(response); // Verifique a estrutura da resposta
+  
+      if (response.status === 'OK' && response.results.length > 0) {
+        const location = response.results[0].geometry.location;
+  
+        // Use as propriedades lat e lng diretamente
+        if (location && location.lat !== undefined && location.lng !== undefined) {
+          this.coordinates = new google.maps.LatLng(location.lat, location.lng);
+          console.log(this.coordinates); // Para verificar os valores
+          this.markerPosition = this.coordinates;
+          this.map.panTo(this.coordinates); // Centraliza o mapa na nova localização
+        } else {
+          console.error('Localização inválida:', location);
+        }
+      } else {
+        console.error('Erro ao buscar coordenadas ou sem resultados:', response.status);
+      }
+    }, (error) => {
+      console.error('Erro na requisição:', error); // Tratamento de erro na requisição
+    });
+  }
+  
   ngAfterViewInit() {
     this.getUserLocation();
+    this.getCoordinates();
   }
 
   getUserLocation() {
@@ -49,7 +88,7 @@ export class MapDisplayComponent implements AfterViewInit {
   }
 
   ngOnChanges() {
-    const fromLocation = this.center
+    const fromLocation = this.coordinates;
     const toLocation = this.to?.location;
 
     if(fromLocation && toLocation){
@@ -81,7 +120,6 @@ export class MapDisplayComponent implements AfterViewInit {
       this.directionsResult = result;
       this.markerPosition = undefined;
     })
-
   }
 
 }

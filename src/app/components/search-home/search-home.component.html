@@ -1,0 +1,15 @@
+<body>
+    <div class="container">
+        <input type="text" name="" id="" [(ngModel)]="searchTerm" placeholder="Digite a clinica desejada..." (input)="onSearch()">
+        <div class="cards">
+            <ul>
+                <li *ngFor="let clinica of clinicas" (click)="getClinicaId(clinica.id)">
+                    <div> {{ clinica.name }} </div>
+                    <div> {{ clinica.nameDentista }}</div>
+                    <div> {{ clinica.especialidade }}</div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</body> 

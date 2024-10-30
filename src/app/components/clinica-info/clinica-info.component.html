@@ -1,0 +1,23 @@
+<body>
+    <div class="container">
+        <div class="container-text" *ngIf="clinica; else loading">
+            <h2>{{ clinica.name }}</h2>
+            <p>{{ clinica.nameDentista }}</p>
+            <p>{{ clinica.emailDentista }}</p>
+            <p>{{ clinica.especialidade }}</p>
+            <p>{{ clinica.description }}</p>
+            <p>{{ clinica.localizacaodto?.rua }}</p>
+            <p>{{ clinica.localizacaodto?.cidade }}</p>
+            <p>{{ clinica.localizacaodto?.estado }}</p>
+            <p>{{ clinica.localizacaodto?.number }}</p>
+        </div>
+
+        <div class="container-map" *ngIf="clinica">
+            <app-map-display [localizacao]="clinica.localizacaodto"></app-map-display>
+        </div>
+        
+        <ng-template #loading>
+            <p>Carregando informações da clínica...</p>
+        </ng-template>
+    </div>
+</body>
