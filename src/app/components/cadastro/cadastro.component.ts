@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CadastroService } from '../../services/cadastro.service';
 import { IlocalizacaoDTO } from '../../interfaces/IlocalizacaoDTO';
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Icadastro {
   name: string;
@@ -26,6 +27,7 @@ export class CadastroComponent implements OnInit {
   clinicForm: FormGroup;
 
   constructor(
+    private toastService: ToastrService,
     private cadastroService: CadastroService,
     private fb: FormBuilder
   ) {
@@ -54,16 +56,16 @@ export class CadastroComponent implements OnInit {
       console.log('Clínica cadastrada:', clinicData); 
       this.cadastroService.cadastro(clinicData).subscribe({
         next: (response) => {
-          console.log("Cadastro realizado com sucesso!", response);
+          this.toastService.success("Formulario cadastrado com sucesso!");
+          this.clinicForm.reset(); 
         },
         error: (err) => {
-          console.error("Erro ao cadastrar:", err);
+          this.toastService.error("Erro ao cadastrar");
         }
       });
-      
-      this.clinicForm.reset();
     } else {
-      console.log('Formulário inválido');
+      console.log("Formulário inválido")
+      this.toastService.error("Formulário inválido");
     }
   }
   

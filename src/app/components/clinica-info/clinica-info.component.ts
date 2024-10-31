@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { ActivatedRoute } from '@angular/router';
 import { MapDisplayComponent } from '../map-display/map-display.component';
-import { PlaceSearchResult } from '../home-page/home-page.component';
 import { IlocalizacaoDTO } from '../../interfaces/IlocalizacaoDTO';
 import { CommonModule } from '@angular/common';
 
@@ -19,8 +18,6 @@ export class ClinicaInfoComponent implements OnInit {
 
   clinicaId:  number;
 
-  fromValue: PlaceSearchResult | undefined;
-  toValue: PlaceSearchResult | undefined;
 
   constructor(private homeService: HomeService,
     private route: ActivatedRoute,

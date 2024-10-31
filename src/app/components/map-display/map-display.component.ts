@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { GoogleMap, GoogleMapsModule, MapDirectionsService } from '@angular/google-maps';
 import { map } from 'rxjs';
-import { PlaceSearchResult } from '../home-page/home-page.component';
 import { HomeService } from '../../services/home.service';
 import { GeocodeService } from '../../services/geocode-service.service';
 import { IlocalizacaoDTO } from '../../interfaces/IlocalizacaoDTO';
@@ -26,8 +25,8 @@ export class MapDisplayComponent implements AfterViewInit {
   directionsResult: google.maps.DirectionsResult | undefined;
   markerPosition: google.maps.LatLng | undefined;
 
-  @Input() from: PlaceSearchResult | undefined
-  @Input() to: PlaceSearchResult | undefined
+  @Input() from: any | undefined
+  @Input() to: any | undefined
 
   address!: string;
   coordinates?: google.maps.LatLng | undefined;
