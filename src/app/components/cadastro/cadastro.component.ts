@@ -22,8 +22,6 @@ export interface Icadastro {
   styleUrl: './cadastro.component.scss'
 })
 
-
-
 export class CadastroComponent implements OnInit {
   clinicForm: FormGroup;
 

@@ -20,6 +20,5 @@ export class CadastroService {
   cadastro(form: any): Observable<Icadastro>{
     return this.httpClient.post<any>(`${this.url()}/clinicas`, form,);
   }
-  
 
 }
