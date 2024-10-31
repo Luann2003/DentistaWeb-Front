@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../enviroments/enviroments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeocodeService {
-  private apiKey = ''; 
+  private apiKey = environment.apiKey; 
   private apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
 
   constructor(private http: HttpClient) {}

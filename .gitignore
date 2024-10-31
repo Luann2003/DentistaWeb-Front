@@ -28,10 +28,14 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
+# Environment files
+src/environments/environment.ts
+
+
 # Miscellaneous
 /.angular/cache
 .sass-cache/
-/connect.lock
+.connect.lock
 /coverage
 /libpeerconnection.log
 testem.log

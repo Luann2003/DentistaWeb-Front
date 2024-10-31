@@ -38,10 +38,10 @@ export class CadastroComponent implements OnInit {
       especialidade: ['', Validators.required],
       description: ['', Validators.required],
       localizacaodto: this.fb.group({
-        rua: [''],
-        cidade: [''],
-        estado: [''],
-        number: ['']
+        rua: ['', Validators.required],
+        cidade: ['', Validators.required],
+        estado: ['', Validators.required],
+        number: ['', Validators.required]
       })
     });
   }
