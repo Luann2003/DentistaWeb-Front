@@ -1,0 +1,60 @@
+<body>  
+<div class="container">
+    <h2>Cadastro de Clínica</h2>
+    <form [formGroup]="clinicForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Nome da Clínica</label>
+        <input id="name" formControlName="name" placeholder="Digite o nome da clínica" />
+      </div>
+  
+      <div class="form-group">
+        <label for="emailDentista">E-mail do Dentista</label>
+        <input id="emailDentista" formControlName="emailDentista" placeholder="Digite o e-mail do dentista" />
+      </div>
+  
+      <div class="form-group">
+        <label for="nameDentista">Nome do Dentista</label>
+        <input id="nameDentista" formControlName="nameDentista" placeholder="Digite o nome do dentista" />
+      </div>
+  
+      <div class="form-group">
+        <label for="especialidade">Especialidade</label>
+        <input id="especialidade" formControlName="especialidade" placeholder="Digite a especialidade" />
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Descrição</label>
+        <textarea id="description" formControlName="description" placeholder="Digite a descrição"></textarea>
+      </div>
+  
+      <h3>Localização</h3>
+
+      <div formGroupName="localizacaodto">
+
+        <div class="form-group">
+            <label for="rua">Rua</label>
+            <input id="rua" formControlName="rua" placeholder="Digite a rua" />
+        </div>
+    
+        <div class="form-group">
+            <label for="cidade">Cidade</label>
+            <input id="cidade" formControlName="cidade" placeholder="Digite a cidade" />
+        </div>
+    
+        <div class="form-group">
+            <label for="estado">Estado</label>
+            <input id="estado" formControlName="estado" placeholder="Digite o estado" />
+        </div>
+    
+        <div class="form-group">
+            <label for="number">Número</label>
+            <input id="number" formControlName="number" placeholder="Digite o número" />
+        </div>
+
+        </div>
+  
+      <button type="submit">Cadastrar Clínica</button>
+    </form>
+  </div>
+</body>
+  
