@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="agendamentoForm">
+    <div class="formulario">
+        <input type="text" placeholder="Nome" formControlName="pacienteName">
+        <input type="text" placeholder="Email" formControlName="pacienteEmail">
+        <input type="text" placeholder="Telefone" formControlName="pacienteTelefone">
+        <input type="time" formControlName="horario">
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Data da Consulta</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="data" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  
+    <button type="submit" mat-raised-button color="primary">Agendar Consulta</button>
+</form>
+  

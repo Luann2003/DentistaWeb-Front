@@ -6,10 +6,18 @@
             <p>{{ clinica.emailDentista }}</p>
             <p>{{ clinica.especialidade }}</p>
             <p>{{ clinica.description }}</p>
-            <p>{{ clinica.localizacaodto?.rua }}</p>
-            <p>{{ clinica.localizacaodto?.cidade }}</p>
-            <p>{{ clinica.localizacaodto?.estado }}</p>
-            <p>{{ clinica.localizacaodto?.number }}</p>
+            <div class="infos">
+                <div class="address-info">
+                    <p>{{ clinica.localizacaodto?.rua }}</p>
+                    <p>{{ clinica.localizacaodto?.cidade }}</p>
+                    <p>{{ clinica.localizacaodto?.estado }}</p>
+                    <p>{{ clinica.localizacaodto?.number }}</p>
+                </div>
+
+                <div class="button-class">
+                    <button (click)="agendar()">Deseja agendar uma consulta?</button>
+                </div>
+            </div>
         </div>
 
         <div class="container-map" *ngIf="clinica">
