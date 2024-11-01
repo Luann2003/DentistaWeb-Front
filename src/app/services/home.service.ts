@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
 export class HomeService {
 
   url = signal(environment.apiUrl)
+
+  private clinicaId: number = 0;
+
   
   constructor(private httpClient: HttpClient) { }
 
@@ -19,8 +22,14 @@ export class HomeService {
 
   findById(id: number): Observable<any>{
     return this.httpClient.get<{ content: any[] }>(this.url() + `/clinicas/${id}`,);
-
   }
 
+  setClinicaId(id: number): void {
+    this.clinicaId = id;
+  }
+
+  getClinicaId(): number {
+    return this.clinicaId;
+  }
 
 }

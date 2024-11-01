@@ -6,12 +6,15 @@ import { IlocalizacaoDTO } from '../../interfaces/IlocalizacaoDTO';
 import { CommonModule } from '@angular/common';
 import { AgendamentoComponent } from "../agendamento/agendamento.component";
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
   selector: 'app-clinica-info',
   standalone: true,
-  imports: [MapDisplayComponent, CommonModule, AgendamentoComponent, MatDialogModule],
+  imports: [MapDisplayComponent, CommonModule, AgendamentoComponent, MatDialogModule, MatDatepickerModule, MatNativeDateModule,MatInputModule],
   templateUrl: './clinica-info.component.html',
   styleUrl: './clinica-info.component.scss'
 })
@@ -35,6 +38,7 @@ export class ClinicaInfoComponent implements OnInit {
   }
 
   getClinicasById(id: number) {
+    this.homeService.setClinicaId(id);
     this.homeService.findById(id).subscribe({
       next: (response) => {
         this.clinica = response; 
